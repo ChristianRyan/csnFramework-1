@@ -7,6 +7,10 @@ def ImportAllDatasets():
     for i in List_files:
         df = pd.read_csv(i)
         print(df)
-ImportAllDatasets()
+        List_DataSets.append(df)
+    return List_DataSets
+
+
+List=ImportAllDatasets()
 #%%
     
