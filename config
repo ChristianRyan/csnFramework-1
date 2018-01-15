@@ -1,1 +1,15 @@
--- this file should have the configuration parameters for the framework
+[params]
+k=default
+interval=default
+searchAlgo=default
+optimization_Type=default
+typeOfClassifier=default
+radius=default
+weight=default
+
+
+[other]
+preprocessing_queue=["preprocessing.scale_and_center",
+                     "preprocessing.dot_reduction",
+                     "preprocessing.connect_lines"]
+use_anonymous=yes
