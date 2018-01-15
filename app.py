@@ -10,6 +10,8 @@ def main():
     print(knn)
     print(knn.get_params())
     
+    # hahahahahha u suck slim
+    
 # TODO: tie the functions together
 
 # TODO: produce the report
