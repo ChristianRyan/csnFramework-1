@@ -5,6 +5,7 @@ sys.path.append('./functions/')
 from mainFunction import knn
 import ConfigReader
 import importDataset
+import gridsearch
 
 
 # This is the main module the user calls
@@ -14,14 +15,14 @@ def main():
 <<<<<<< HEAD
     #print(knn)
     #print(knn.get_params())
-    
+
     #Loading all csv files as datasets
     datasets=ImportAllDatasets()
-    
-    
+
+
     # Load the configuration params
  #   k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight=ReadConfig()
-    
+
 =======
     print(knn)
     print(knn.get_params())
