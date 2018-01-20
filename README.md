@@ -2,13 +2,19 @@
 
 Simple framework for determining best k for kNN in python.
 
-# Datasets
+# How to use
+
+## Datasets
 
 To use put clean datasets in the datasets folder with the target value named
 
+## Config file
+
 # Optimisation
 
-## Brute Force search
+## Grid search
+
+## Randomized search
 
 ## Custom search
 
