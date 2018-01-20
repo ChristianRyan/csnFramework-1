@@ -12,7 +12,7 @@ def grdSearch(dataset, classifier, gridparams = None, upperadd = 50, number_of_v
     lodf = []
     for data in dataset:
         n = int(data.describe().iloc[0,0])
-        gridparams = {'n_neighbors' : np.linspace(1, round(math.sqrt(n)) + upperadd, 5).astype(int)}
+        gridparams = {'n_neighbors' : np.linspace(1, round(math.sqrt(n)) + upperadd, number_of_values).astype(int)}
         clf = GridSearchCV(classifier, gridparams, n_jobs=-1) # TODO: BE careful with cores :D
         y = data['target']
         X = data.drop('target', axis=1)
