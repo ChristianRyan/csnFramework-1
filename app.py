@@ -2,10 +2,11 @@ import pandas as pd
 import numpy as np
 import sys
 sys.path.append('./functions/')
-from mainFunction import knn
+#from mainFunction import knn
 from ConfigReader import ReadConfig
 from importDataset import *
 from gridsearch import *
+from randomizedSearch import *
 
 
 # This is the main module the user calls
@@ -28,6 +29,7 @@ def main():
     # TODO: 1.1 Grid search
     
     # TODO: 1.2 Randomized search
+    print(randomSearch([datasets[1]]),5)
     
     # TODO: 1.3 OurImplementation for brute force arround sqrt(n)
     
