@@ -3,7 +3,7 @@ import numpy as np
 import sys
 sys.path.append('./functions/')
 from mainFunction import knn
-import ConfigReader
+from ConfigReader import ReadConfig
 from importDataset import *
 from gridsearch import *
 
@@ -17,13 +17,28 @@ def main():
 
 
     # Load the configuration params
-    k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight=ReadConfig()
+    k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight=ReadConfig()    
 
-    print(knn)
-    print(knn.get_params())
+    # TODO: create knn classifier
+    # TODO: this changes based on the config file
 
-    lodf = grdSearch(datasets, knn)
-    print(lodf)
+    
+    # TODO: 1 optimize parameters
+    
+    # TODO: 1.1 Grid search
+    
+    # TODO: 1.2 Randomized search
+    
+    # TODO: 1.3 OurImplementation for brute force arround sqrt(n)
+    
+    # TODO: export report
+
+
+   # print(knn)
+    #print(knn.get_params())
+
+    #lodf = grdSearch(datasets, knn)
+    #print(lodf)
 
 
 # TODO: tie the functions together

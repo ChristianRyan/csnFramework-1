@@ -29,10 +29,9 @@ def ReadConfig():
     if 'radiusN' in typeOfClassifier:
         if radius=='default':
             radius=1.0
-        if weight=='default':
-            weight=['uniform']
-    return [k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight]
-
+    if weight=='default':
+        weight=['uniform']
+    return k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight
 
 
 #%%
