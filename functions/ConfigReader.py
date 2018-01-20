@@ -33,4 +33,6 @@ def ReadConfig():
             weight=['uniform']
     return [k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight]
 
+
+
 #%%
