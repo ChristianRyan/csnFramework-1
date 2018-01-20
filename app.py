@@ -4,7 +4,7 @@ import sys
 sys.path.append('./functions/')
 from mainFunction import knn
 import ConfigReader
-import importDataset
+from importDataset import *
 import gridsearch
 
 
