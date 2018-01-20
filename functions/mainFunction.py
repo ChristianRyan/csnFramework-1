@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
-<<<<<<< HEAD
+#<<<<<<< HEAD
 from report import *
 
 
@@ -12,10 +12,10 @@ from report import *
 
 #%%
 
-=======
+#=======
 # from report import *
 # from importDataset import *
->>>>>>> cb3342c636f2f76fa5a32f9364282bced3792632
+#>>>>>>> cb3342c636f2f76fa5a32f9364282bced3792632
 
 # TODO: create knn classifier
 # TODO: this changes based on the config file
