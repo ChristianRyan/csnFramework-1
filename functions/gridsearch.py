@@ -9,8 +9,8 @@ from importDataset import *
 def grdSearch(dataset, classifier, gridparams = None, upperadd = 50, number_of_values = 25):
     params = classifier.get_params()
 
-    lodf = []
-    for data in dataset:
+    returnDict = {}
+    for idx, data in enumerate(dataset):
         print("---Running dataset Grid Search---")
         n = int(data.describe().iloc[0,0])
         print("n for the dataset is", n)
@@ -22,6 +22,7 @@ def grdSearch(dataset, classifier, gridparams = None, upperadd = 50, number_of_v
         X = data.drop('target', axis=1)
         print("---Fitting data Grid Search---")
         clf.fit(X, y)
-        lodf.append(pd.DataFrame(clf.cv_results_))
+        returnDict['dataset '+idx] = ''
+        #lodf.append(pd.DataFrame(clf.cv_results_))
     # For now returns a list of dataframes that contain grid search result parameters (or rather should didnt test), should return optimal k
-    return lodf
+    return returnDict

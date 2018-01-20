@@ -1,14 +1,16 @@
 # csnFramework
 
-Simple framework for determining best k for kNN in python.
+Simple framework for determining best k for kNN in python for the course in Machine Learning at Technical University Vienna.
 
 # How to use
 
 ## Datasets
 
-To use put clean datasets in the datasets folder with the target value named
+To use put clean datasets in the datasets folder with the target value named.
 
 ## Config file
+
+The config file contains parameters that can be changed based on the desired result.
 
 # Optimisation
 
