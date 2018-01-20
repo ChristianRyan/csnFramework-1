@@ -5,7 +5,7 @@ sys.path.append('./functions/')
 from mainFunction import knn
 import ConfigReader
 from importDataset import *
-import gridsearch
+from gridsearch import *
 
 
 # This is the main module the user calls
@@ -20,6 +20,10 @@ def main():
     # k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight=ReadConfig()
     print(knn)
     print(knn.get_params())
+
+    lodf = grdSearch(datasets, knn)
+    print(lodf)
+
 
 # TODO: tie the functions together
 
