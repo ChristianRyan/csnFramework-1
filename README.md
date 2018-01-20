@@ -1,16 +1,24 @@
 # csnFramework
 
-Simple framework for determining best k for kNN in python.
+Simple framework for determining best k for kNN in python for the course in Machine Learning at Technical University Vienna.
 
-# Datasets
+# How to use
 
-To use put clean datasets in the datasets folder with the target value named 
+## Datasets
 
-# Built in optimisations
+To use put clean datasets in the datasets folder with the target value named.
 
-# Brute Force search
+## Config file
 
-# Custom search
+The config file contains parameters that can be changed based on the desired result.
+
+# Optimisation
+
+## Grid search
+
+## Randomized search
+
+## Custom search
 
 Based on the premise that the optimal k for kNN is sqrt(n) where n is number of instances for the dataset. The custom search allows for specifying the interval around sqrt(n) and brute force searching in that region.
 
