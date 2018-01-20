@@ -17,7 +17,8 @@ def main():
 
 
     # Load the configuration params
-    # k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight=ReadConfig()
+    k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight=ReadConfig()
+
     print(knn)
     print(knn.get_params())
 

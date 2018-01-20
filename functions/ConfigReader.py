@@ -11,7 +11,7 @@ import configparser
 def ReadConfig():
     """  """
     config = configparser.ConfigParser()
-    config.read('../config')
+    config.read('./config')
     params=config['params']
     k=params.get('k')
     interval=params.get('interval')
