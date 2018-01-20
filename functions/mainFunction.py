@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
+<<<<<<< HEAD
 from report import *
 
 
@@ -11,9 +12,16 @@ from report import *
 
 #%%
 
+=======
+# from report import *
+# from importDataset import *
+>>>>>>> cb3342c636f2f76fa5a32f9364282bced3792632
 
 # TODO: create knn classifier
+# TODO: this changes based on the config file
 knn = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=-1)
+# contains params
+knnparams = knn.get_params()
 
 # TODO: 1 optimize parameters
 
