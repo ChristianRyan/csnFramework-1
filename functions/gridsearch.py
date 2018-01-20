@@ -13,7 +13,9 @@ def grdSearch(dataset, classifier, gridparams = None, lwrBound = 1):
     for idx, data in enumerate(dataset):
         print("---Running dataset Grid Search---")
         # Get the n
-        n = int(data.describe().iloc[0,0])
+        n = data.shape[0]
+        # Get the l
+        l = data.shape[1]
         print("n for the dataset is", n)
         # Set the upper bound for searching, default is 0.2*n
         uprBound = int(math.sqrt(n) + 0.2*(math.sqrt(n)))
@@ -31,8 +33,13 @@ def grdSearch(dataset, classifier, gridparams = None, lwrBound = 1):
         print("---Fitting data Grid Search---")
         clf.fit(X, y)
         # Results of the fit
-        resultsdf = pd.DataFrame(clf.cv_results_)
-        returnDict['dataset '+idx] = ''
-        #lodf.append(pd.DataFrame(clf.cv_results_))
-    # For now returns a list of dataframes that contain grid search result parameters (or rather should didnt test), should return optimal k
-    return returnDict
+        resultsGridSearch = pd.DataFrame(clf.cv_results_)
+        # TODO: fix because cannot broadcast overwriting previous, use append
+        returnDf[['fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro']] = resultsGridSearch['mean_fit_time', 'mean_test_accuracy', 'mean_test_recall_macro', 'mean_test_recall_micro', 'mean_test_precision_macro', 'mean_test_precision_micro']
+        returnDf['Strategy'] = 'Brute Force'
+        returnDf['Dataset'] = 'D' + str(idx)
+        returnDf['n_instances'] = n
+        returnDf['l_attributes'] = l
+        returnDf['k_neighbours'] = 'D' + str(idx)
+
+    return returnDf
