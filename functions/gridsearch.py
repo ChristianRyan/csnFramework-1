@@ -6,11 +6,13 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 from importDataset import *
 
-def grdSearch(dataset, classifier, gridparams = None, lwrBound = 1):
+def gridSearch(dataset, classifier, gridparams = None, lwrBound = 1):
     params = classifier.get_params()
+    returnmainDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro'])
 
-    returnDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro'])
+    returnListDfs = []
     for idx, data in enumerate(dataset):
+        returnDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro'])
         print("---Running dataset Grid Search---")
         # Get the n
         n = data.shape[0]
@@ -34,12 +36,15 @@ def grdSearch(dataset, classifier, gridparams = None, lwrBound = 1):
         clf.fit(X, y)
         # Results of the fit
         resultsGridSearch = pd.DataFrame(clf.cv_results_)
-        # TODO: fix because cannot broadcast overwriting previous, use append
-        returnDf[['fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro']] = resultsGridSearch['mean_fit_time', 'mean_test_accuracy', 'mean_test_recall_macro', 'mean_test_recall_micro', 'mean_test_precision_macro', 'mean_test_precision_micro']
+        returnDf[['fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro']] = resultsGridSearch[['mean_fit_time', 'mean_test_accuracy', 'mean_test_recall_macro', 'mean_test_recall_micro', 'mean_test_precision_macro', 'mean_test_precision_micro']]
         returnDf['Strategy'] = 'Brute Force'
         returnDf['Dataset'] = 'D' + str(idx)
         returnDf['n_instances'] = n
         returnDf['l_attributes'] = l
-        returnDf['k_neighbours'] = 'D' + str(idx)
+        returnDf['k_neighbours'] = 'D' + str(idx) # TODO: Fix k_neighbours
+        returnListDfs.append(returnDf)
 
-    return returnDf
+    for dataf in returnListDfs:
+        returnmainDf = returnmainDf.append(dataf)
+
+    return returnmainDf
