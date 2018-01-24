@@ -1,10 +1,8 @@
-import pandas as np
+import pandas as pd
 import numpy as np
 import math
 
 from sklearn.model_selection import GridSearchCV
-from sklearn.neighbors import KNeighborsClassifier
-from importDataset import *
 
 def gridSearch(dataset, classifier, gridparams = None, lwrBound = 1):
     params = classifier.get_params()
