@@ -26,21 +26,18 @@ def main():
     print(knn)
     # TODO: this changes based on the config file
 
+    # Brute force search from 1 - sqrt(n)+bound
+    # print(gridSearch([datasets[0][1]], knn))
 
-    # TODO: 1 optimize parameters
+    # Brute force search from [sqrt(n)-i, sqrt(n)+i]
+    # print(gridSearch([datasets[0][1]], knn, lwrBound = None))
 
-    # TODO: 1.1 Grid search
-    print(gridSearch([datasets[0][1]], knn))
-    # for value in datasets:
-    #     print(type(value))
-    #     for thing in value:
-    #         print(type(thing))
+    # Brute force search for custom bounds
+    print(gridSearch([datasets[0][1]], knn, lwrBound = 20, uprBound = 40))
 
-    # print(type(datasets[0][0]))
+    # TODO: Randomized search
 
-    # TODO: 1.2 Randomized search
-
-    # TODO: 1.3 OurImplementation for brute force arround sqrt(n)
+    # TODO: Binary search
 
     # TODO: export report
 
