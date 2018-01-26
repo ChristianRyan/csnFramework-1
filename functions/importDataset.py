@@ -11,11 +11,9 @@ def ImportAllDatasets():
         print("Importing " +i)
         df = pd.read_csv(i)
         List_DataSets.append(df)
-    return List_DataSets,
 
+    return List_DataSets
 
-#List=ImportAllDatasets()
-#print(List)
 
 
 #%%
