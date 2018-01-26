@@ -16,7 +16,7 @@ from mainFunction import *
 def main():
     #Loading all csv files as datasets
     datasets=ImportAllDatasets()
-#    print(type(datasets))
+#    print(datasets[3])
 
     # Load the configuration params
     k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight=ReadConfig()
@@ -27,8 +27,12 @@ def main():
     #print(knn)
     # TODO: this changes based on the config file
 
+    # Brute force search from 1 - sqrt(n)+bound
+    # print(gridSearch([datasets[0][1]], knn))
 
-    # TODO: 1 optimize parameters
+    # Brute force search from [sqrt(n)-i, sqrt(n)+i]
+    # print(gridSearch([datasets[0][1]], knn, lwrBound = None))
+
 
     # TODO: 1.1 Grid search
     #print(gridSearch([datasets[0][1]], knn))
@@ -37,14 +41,13 @@ def main():
     #     for thing in value:
     #         print(type(thing))
 
-    # print(type(datasets[0][0]))
+    # Brute force search for custom bounds
+    #print(gridSearch([datasets[0][1]], knn, lwrBound = 20, uprBound = 40))
 
-    # TODO: 1.2 Randomized search
-    print(randomSearch([datasets[1]],5))
-    
 
-    #print(randomSearch([datasets[1]]),5)
-    # TODO: 1.3 OurImplementation for brute force arround sqrt(n)
+    # TODO: Randomized search
+
+
 
     # TODO: export report
 
@@ -54,6 +57,8 @@ def main():
 
     #lodf = grdSearch(datasets, knn)
     #print(lodf)
+    
+    print(randomSearch([datasets[3]],5))
 
 
 # TODO: tie the functions together
