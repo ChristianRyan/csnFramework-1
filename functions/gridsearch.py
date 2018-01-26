@@ -1,19 +1,21 @@
-import pandas as np
+import pandas as pd
 import numpy as np
 import math
 
 from sklearn.model_selection import GridSearchCV
-from sklearn.neighbors import KNeighborsClassifier
-from importDataset import *
 
-def grdSearch(dataset, classifier, gridparams = None, lwrBound = 1):
+def gridSearch(dataset, classifier, gridparams = None, lwrBound = 1):
     params = classifier.get_params()
+    returnmainDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro'])
 
-    returnDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro'])
+    returnListDfs = []
     for idx, data in enumerate(dataset):
+        returnDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro'])
         print("---Running dataset Grid Search---")
         # Get the n
-        n = int(data.describe().iloc[0,0])
+        n = data.shape[0]
+        # Get the l
+        l = data.shape[1]
         print("n for the dataset is", n)
         # Set the upper bound for searching, default is 0.2*n
         uprBound = int(math.sqrt(n) + 0.2*(math.sqrt(n)))
@@ -31,8 +33,16 @@ def grdSearch(dataset, classifier, gridparams = None, lwrBound = 1):
         print("---Fitting data Grid Search---")
         clf.fit(X, y)
         # Results of the fit
-        resultsdf = pd.DataFrame(clf.cv_results_)
-        returnDict['dataset '+idx] = ''
-        #lodf.append(pd.DataFrame(clf.cv_results_))
-    # For now returns a list of dataframes that contain grid search result parameters (or rather should didnt test), should return optimal k
-    return returnDict
+        resultsGridSearch = pd.DataFrame(clf.cv_results_)
+        returnDf[['fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro']] = resultsGridSearch[['mean_fit_time', 'mean_test_accuracy', 'mean_test_recall_macro', 'mean_test_recall_micro', 'mean_test_precision_macro', 'mean_test_precision_micro']]
+        returnDf['Strategy'] = 'Brute Force'
+        returnDf['Dataset'] = 'D' + str(idx)
+        returnDf['n_instances'] = n
+        returnDf['l_attributes'] = l
+        returnDf['k_neighbours'] = 'D' + str(idx) # TODO: Fix k_neighbours
+        returnListDfs.append(returnDf)
+
+    for dataf in returnListDfs:
+        returnmainDf = returnmainDf.append(dataf)
+
+    return returnmainDf
