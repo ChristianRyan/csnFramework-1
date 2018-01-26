@@ -26,7 +26,7 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
         # Set the upper bound for searching, default is 0.2*n
         # Can be changed to interval
         if uprBound is None and lwrBound == 1:
-            uprBound = int(math.sqrt(n) + 0.2*(n))
+            uprBound = int(math.sqrt(n) + 0.1*(n))
         elif uprBound is None and lwrBound is None:
             uprBound =  int(math.sqrt(n) + 0.1*(n))
             lwrBound =  int(math.sqrt(n) - 0.1*(n))
@@ -71,6 +71,10 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
         returnDf['k_neighbours'] = gridparams['n_neighbors']
         # Append to a list and iterate later over list to append to single data frame
         returnListDfs.append(returnDf)
+
+        # Reset bounds
+        uprBound = None
+        lwrBound = None
 
     # Looping over list to create single dataframe
     for dataf in returnListDfs:

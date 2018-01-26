@@ -30,7 +30,7 @@ def main():
     # print(gridSearch([datasets[0][1]], knn))
 
     # Brute force search from [sqrt(n)-i, sqrt(n)+i]
-    gs = gridSearch(datasets[0], knn, lwrBound = None)
+    gs = gridSearch([datasets[0][1],datasets[0][3]], knn, lwrBound = None)
     gs.to_csv('gridsearchlarge.csv')
 
     # Brute force search for custom bounds
