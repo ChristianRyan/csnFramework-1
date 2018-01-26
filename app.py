@@ -29,7 +29,7 @@ def main():
     # TODO: 1.1 Grid search
     
     # TODO: 1.2 Randomized search
-    print(randomSearch([datasets[1]]),5)
+    print(randomSearch([datasets[1]],5))
     
     # TODO: 1.3 OurImplementation for brute force arround sqrt(n)
     
