@@ -25,7 +25,7 @@ def randomSearch(dataset,n_iter,classifier=KNeighborsClassifier(n_neighbors=1), 
         y = data['target']
         X = data.drop('target', axis=1)
         clf.fit(X, y)
-        for i in range(0,n_iter):
+        #for i in range(0,n_iter):
 #            returnDf.append('RandomSearch','Dataset '+idx,n,)
 
         #returnDict['dataset '+idx] = ''

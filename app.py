@@ -39,7 +39,6 @@ def main():
     # print(type(datasets[0][0]))
 
     # TODO: 1.2 Randomized search
-    #print(randomSearch([datasets[1]]),5)
 
     # TODO: 1.3 OurImplementation for brute force arround sqrt(n)
 

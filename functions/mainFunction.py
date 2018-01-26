@@ -5,7 +5,7 @@ from sklearn.neighbors import RadiusNeighborsClassifier
 from report import *
 
 
-
+#Creating all models according to combinations of paramters
 def createAllModels(datasets,k,interval,searchAlgo,optimization_Type,typeOfClassifier,radius,weight):
     list_knn_models=[]
     for d in datasets:
@@ -25,3 +25,10 @@ def createAllModels(datasets,k,interval,searchAlgo,optimization_Type,typeOfClass
                             radiusNN=RadiusNeighborsClassifier(radius=radius, weights=j, algorithm=opt_type, leaf_size=30, p=2, metric='minkowski', outlier_label=None, metric_params=None)
                             list_knn_models.append(radiusNN)
     return list_knn_models
+
+
+#Fits all models for one trainset
+def fitAllModels(listModels,train_set,target):
+    for i in listModels:
+        i.fit(train_set,target)
+    
