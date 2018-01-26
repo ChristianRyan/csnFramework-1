@@ -6,6 +6,7 @@ sys.path.append('./functions/')
 from ConfigReader import ReadConfig
 from importDataset import *
 from gridsearch import *
+from binarySearch import *
 #from randomizedSearch import *
 from mainFunction import *
 
@@ -24,6 +25,7 @@ def main():
     # For now I have a placeholder
     knn = KNeighborsClassifier(n_neighbors=100, n_jobs=-1)
     print(knn)
+    
     # TODO: this changes based on the config file
 
     # Brute force search from 1 - sqrt(n)+bound
@@ -38,7 +40,7 @@ def main():
     # TODO: Randomized search
 
     # TODO: Binary search
-
+    print(binarySearch(datasets[0][1],knn))
     # TODO: export report
 
 
