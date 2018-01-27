@@ -59,11 +59,10 @@ def binarySearch(dataset, classifier):
     score_params = ['accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro']
     classifier.set_params(n_neighbors = k)
     scores = cross_validate(classifier, dataset, y, scoring=score_params, return_train_score=False)   
-
+    print(scores)
     returnDf = pd.DataFrame(scores)
-    #vals = ['mean_fit_time', 'mean_test_accuracy', 'mean_test_recall_macro', 'mean_test_recall_micro', 'mean_test_precision_macro', 'mean_test_precision_micro']
-    #returnDf = resultsBinarySearch[vals]
-    # Fill with rest of data
+    returnDf = returnDf.mean()
+
     returnDf['Strategy'] = 'Binary Search'
     returnDf['Dataset'] = 'D1'
     returnDf['n_instances'] = n
