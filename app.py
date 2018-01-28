@@ -6,12 +6,8 @@ sys.path.append('./functions/')
 from ConfigReader import ReadConfig
 from importDataset import ImportAllDatasets
 from gridsearch import *
-<<<<<<< HEAD
 from binarySearch import *
-#from randomizedSearch import *
-=======
 from randomizedSearch import *
->>>>>>> a1b195f12b231fd7443d4fe658719c9936f2fb24
 from mainFunction import *
 
 
@@ -39,8 +35,8 @@ def main():
     # print(gridSearch([datasets[0][1]], knn))
 
     # Brute force search from [sqrt(n)-i, sqrt(n)+i]
-    gs = gridSearch([datasets[0][1],datasets[0][3]], knn, lwrBound = None)
-    gs.to_csv('gridsearchlarge.csv')
+    gs = gridSearch([datasets[0][1]], knn, lwrBound = None)
+    #gs.to_csv('gridsearchlarge.csv')
 
 
     # TODO: 1.1 Grid search
@@ -56,7 +52,7 @@ def main():
 
     # TODO: Randomized search
     # TODO: Binary search
-    print(binarySearch(datasets[0][1],knn))
+    #print(binarySearch(datasets[0][1],knn))
 
     # TODO: export report
 
@@ -67,7 +63,7 @@ def main():
     #lodf = grdSearch(datasets, knn)
     #print(lodf)
 
-    print(randomSearch([datasets[3]],5))
+    #print(randomSearch([datasets[3]],5))
 
 
 # TODO: tie the functions together
