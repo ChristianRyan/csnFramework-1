@@ -20,20 +20,20 @@ def binarySearch(dataset, classifier):
     # lower/upperbounds
     lb = 1
     ub = round(2*n/3) - 1
-    
+
     y = dataset['target']
     dataset = dataset.drop('target', axis=1)
     #'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro'
     score_params = ['accuracy']
-    
+
     classifier.set_params(n_neighbors = ub)
     scores = cross_validate(classifier, dataset, y, scoring=score_params, return_train_score=False)
     scores_ub = scores['test_accuracy'].mean()
-    classifier.set_params(n_neighbors = lb)  
+    classifier.set_params(n_neighbors = lb)
     scores = cross_validate(classifier, dataset, y, scoring=score_params, return_train_score=False)
     scores_lb = scores['test_accuracy'].mean()
     k = 0
-    while (abs(ub-lb) >= 1) & (abs(scores_ub-scores_lb) >= 0.01):     
+    while (abs(ub-lb) >= 1) & (abs(scores_ub-scores_lb) >= 0.01):
         if (scores_lb > scores_ub):
             ub = round(abs(ub+lb)/2)
             dummy = True
@@ -50,15 +50,15 @@ def binarySearch(dataset, classifier):
             print(scores_ub)
         else:
             print(lb)
-            classifier.set_params(n_neighbors = lb)  
+            classifier.set_params(n_neighbors = lb)
             scores = cross_validate(classifier, dataset, y, scoring=score_params, return_train_score=False)
             scores_lb = scores['test_accuracy'].mean()
             print(scores_lb)
-            
-    
-    score_params = ['accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro']
+
+
+    score_params = ['accuracy', 'f1_macro', 'f1_micro', 'precision_macro', 'precision_micro']
     classifier.set_params(n_neighbors = k)
-    scores = cross_validate(classifier, dataset, y, scoring=score_params, return_train_score=False)   
+    scores = cross_validate(classifier, dataset, y, scoring=score_params, return_train_score=False)
 
     returnDf = pd.DataFrame(scores)
     #vals = ['mean_fit_time', 'mean_test_accuracy', 'mean_test_recall_macro', 'mean_test_recall_micro', 'mean_test_precision_macro', 'mean_test_precision_micro']
@@ -70,7 +70,4 @@ def binarySearch(dataset, classifier):
     returnDf['l_attributes'] = l
     returnDf['k_neighbours'] = k
 
-    return returnDf   
-
-
-    
+    return returnDf

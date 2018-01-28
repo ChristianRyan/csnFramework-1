@@ -6,7 +6,7 @@ from sklearn.model_selection import GridSearchCV
 
 def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
     params = classifier.get_params()
-    cols = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro']
+    cols = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'f1_macro', 'f1_micro']
     returnmainDf = pd.DataFrame(columns=cols)
 
     returnListDfs = []
@@ -45,7 +45,7 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
         print("Grid parameters for the dataset are", gridparams)
 
         # setting the scores and GridSearchCV
-        scores = ['accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro']
+        scores = ['accuracy', 'f1_macro', 'f1_micro']
         clf = GridSearchCV(classifier, gridparams, n_jobs=-1, scoring=scores, refit=False) # BE careful with cores :D
 
         print(clf)
@@ -61,7 +61,7 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
         resultsGridSearch = pd.DataFrame(clf.cv_results_)
 
         # Copy values from clf results
-        vals = ['mean_fit_time', 'mean_test_accuracy', 'mean_test_recall_macro', 'mean_test_recall_micro', 'mean_test_precision_macro', 'mean_test_precision_micro']
+        vals = ['mean_fit_time', 'mean_test_accuracy', 'mean_test_f1_macro', 'mean_test_f1_micro']
         returnDf[cols[5:]] = resultsGridSearch[vals]
         # Fill with rest of data
         returnDf['Strategy'] = 'Brute Force'
