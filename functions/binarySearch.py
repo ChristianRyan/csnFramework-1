@@ -58,13 +58,10 @@ def binarySearch(dataset, classifier):
 
     score_params = ['accuracy', 'f1_macro', 'f1_micro', 'precision_macro', 'precision_micro']
     classifier.set_params(n_neighbors = k)
-<<<<<<< HEAD
     scores = cross_validate(classifier, dataset, y, scoring=score_params, return_train_score=False)
 
-=======
-    scores = cross_validate(classifier, dataset, y, scoring=score_params, return_train_score=False)   
     print(scores)
->>>>>>> cd77477d26986d3b2c9386772e265106a04bbfc8
+
     returnDf = pd.DataFrame(scores)
     returnDf = returnDf.mean()
 
