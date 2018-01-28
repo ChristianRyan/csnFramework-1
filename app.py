@@ -28,14 +28,11 @@ def main():
 
     # TODO: create knn classifier
     # For now I have a placeholder
-<<<<<<< HEAD
     knn = KNeighborsClassifier(n_neighbors=100, n_jobs=-1)
     print(knn)
-    
-=======
+
     #knn = KNeighborsClassifier(n_neighbors=100, n_jobs=-1)
     #print(knn)
->>>>>>> a1b195f12b231fd7443d4fe658719c9936f2fb24
     # TODO: this changes based on the config file
 
     # Brute force search from 1 - sqrt(n)+bound
@@ -58,14 +55,9 @@ def main():
 
 
     # TODO: Randomized search
-
-<<<<<<< HEAD
     # TODO: Binary search
     print(binarySearch(datasets[0][1],knn))
-=======
 
-
->>>>>>> a1b195f12b231fd7443d4fe658719c9936f2fb24
     # TODO: export report
 
 
@@ -74,7 +66,7 @@ def main():
 
     #lodf = grdSearch(datasets, knn)
     #print(lodf)
-    
+
     print(randomSearch([datasets[3]],5))
 
 
