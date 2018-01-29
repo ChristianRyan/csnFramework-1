@@ -35,7 +35,7 @@ def main():
     # print(gridSearch([datasets[0][1]], knn))
 
     # Brute force search from [sqrt(n)-i, sqrt(n)+i]
-    gs = gridSearch([datasets[0][1]], knn, lwrBound = None)
+    print(gridSearch([datasets[1]], knn, lwrBound = None))
     #gs.to_csv('gridsearchlarge.csv')
 
 
