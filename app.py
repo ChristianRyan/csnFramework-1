@@ -24,7 +24,7 @@ def main():
 
     # TODO: create knn classifier
     # For now I have a placeholder
-    knn = KNeighborsClassifier(n_neighbors=100, n_jobs=-1)
+    knn = KNeighborsClassifier(weights='distance', n_jobs=-1)
     print(knn)
 
     #knn = KNeighborsClassifier(n_neighbors=100, n_jobs=-1)
