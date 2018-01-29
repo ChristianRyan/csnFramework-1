@@ -1,6 +1,6 @@
 # csnFramework
 
-Simple framework for determining best k for kNN in python for the course in Machine Learning at Technical University Vienna.
+Simple framework for finding the best k for kNN in python for the course in Machine Learning at Technical University Vienna.
 
 # How to use
 
@@ -8,17 +8,23 @@ Simple framework for determining best k for kNN in python for the course in Mach
 
 To use put clean datasets in the datasets folder with the target value named 'target'.
 
-# Optimisation
+# k search
 
-## Grid search
+## Global Brute force search
+
+Simply brute force searches from 1 - square root of n plus 10% above. Warning: Could experience long run time
+
+## Local Brute force search
+
+Based on the premise that the best k for kNN is in the area of sqrt(n) where n is number of instances for the dataset. The custom search allows for searching within 10% of n in the interval around sqrt(n) and brute force searching in that region.
 
 ## Randomized search
 
-## Custom Local search
-
-Based on the premise that the optimal k for kNN is sqrt(n) where n is number of instances for the dataset. The custom search allows for specifying the interval around sqrt(n) and brute force searching in that region.
-
 ## Binary search
+
+# Optimisation strategies
+
+
 
 # Contributors
 

@@ -46,8 +46,7 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
 
         # setting the scores and GridSearchCV
         scores = ['accuracy', 'f1_macro', 'f1_micro']
-        clf = GridSearchCV(classifier, gridparams, n_jobs=-1, scoring=scores, refit=False) # BE careful with cores :D
-
+        clf = GridSearchCV(classifier, gridparams, n_jobs=-1, scoring=scores, refit=False) 
         print(clf)
 
         # Seperating the X and y, the class to be classified

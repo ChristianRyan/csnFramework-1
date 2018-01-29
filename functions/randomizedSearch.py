@@ -6,11 +6,12 @@ Created on Sat Jan 20 13:14:27 2018
 @author: slim
 """
 from sklearn.model_selection import RandomizedSearchCV
-from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
 import pandas as pd
 import math
 from sklearn.metrics import *
+from sklearn.neighbors import KNeighborsClassifier
+
 
 def randomSearch(dataset,n_iter,classifier=KNeighborsClassifier(n_neighbors=1), number_of_values = 100,scores=['accuracy','f1_macro', 'f1_micro']):
     returnmainDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'f1_macro', 'f1_micro'])
@@ -22,7 +23,7 @@ def randomSearch(dataset,n_iter,classifier=KNeighborsClassifier(n_neighbors=1), 
         n = data.shape[0]
 
         gridparams = {'n_neighbors' : np.linspace(1, round(math.sqrt(n)), number_of_values).astype(int)}
-        clf = RandomizedSearchCV(classifier, gridparams, n_iter=n_iter,n_jobs=-1,scoring=scores,refit=False) # TODO: BE careful with cores :D
+        clf = RandomizedSearchCV(classifier, gridparams, n_iter=n_iter,n_jobs=-1,scoring=scores,refit=False)
         y = data['target']
         X = data.drop('target', axis=1)
         clf.fit(X, y)
