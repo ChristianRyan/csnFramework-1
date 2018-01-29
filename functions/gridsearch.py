@@ -64,7 +64,13 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
         vals = ['mean_fit_time', 'mean_test_accuracy', 'mean_test_f1_macro', 'mean_test_f1_micro']
         returnDf[cols[5:]] = resultsGridSearch[vals]
         # Fill with rest of data
-        returnDf['Strategy'] = 'Brute Force'
+        if uprBound is None and lwrBound == 1:
+            returnDf['Strategy'] = 'Global Brute Force'
+        elif uprBound is None and lwrBound is None:
+            returnDf['Strategy'] = 'Local Brute Force'
+        else:
+            returnDf['Strategy'] = 'Custom Local Brute Force'
+
         returnDf['Dataset'] = 'D' + str(idx)
         returnDf['n_instances'] = n
         returnDf['l_attributes'] = l

@@ -56,7 +56,7 @@ def binarySearch(dataset, classifier):
             print(scores_lb)
 
 
-    score_params = ['accuracy', 'f1_macro', 'f1_micro', 'precision_macro', 'precision_micro']
+    score_params = ['accuracy', 'f1_macro', 'f1_micro']
     classifier.set_params(n_neighbors = k)
     scores = cross_validate(classifier, dataset, y, scoring=score_params, return_train_score=False)
 

@@ -12,22 +12,22 @@ import pandas as pd
 import math
 from sklearn.metrics import *
 
-def randomSearch(dataset,n_iter,classifier=KNeighborsClassifier(n_neighbors=1), number_of_values = 100,scores=['accuracy','recall_macro','recall_micro','precision_macro','precision_micro']):
-    returnmainDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro'])
-    
+def randomSearch(dataset,n_iter,classifier=KNeighborsClassifier(n_neighbors=1), number_of_values = 100,scores=['accuracy','f1_macro', 'f1_micro']):
+    returnmainDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'f1_macro', 'f1_micro'])
+
     returnListDfs = []
-    returnDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro'])
+    returnDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'f1_macro', 'f1_micro'])
     for idx, data in enumerate(dataset):
         print("New dataset",data.shape[0])
         n = data.shape[0]
-        
+
         gridparams = {'n_neighbors' : np.linspace(1, round(math.sqrt(n)), number_of_values).astype(int)}
         clf = RandomizedSearchCV(classifier, gridparams, n_iter=n_iter,n_jobs=-1,scoring=scores,refit=False) # TODO: BE careful with cores :D
         y = data['target']
         X = data.drop('target', axis=1)
         clf.fit(X, y)
         resultsGridSearch = pd.DataFrame(clf.cv_results_)
-        returnDf[['fit_time', 'accuracy', 'recall_macro', 'recall_micro', 'precision_macro', 'precision_micro']] = resultsGridSearch[['mean_fit_time', 'mean_test_accuracy', 'mean_test_recall_macro', 'mean_test_recall_micro', 'mean_test_precision_macro', 'mean_test_precision_micro']]
+        returnDf[['fit_time', 'accuracy', 'f1_macro', 'f1_micro']] = resultsGridSearch[['mean_fit_time', 'mean_test_accuracy', 'mean_test_f1_macro', 'mean_test_f1_micro']]
         returnDf['Strategy'] = 'Brute Force'
         returnDf['Dataset'] = 'D' + str(idx)
         returnDf['n_instances'] = n
@@ -36,8 +36,6 @@ def randomSearch(dataset,n_iter,classifier=KNeighborsClassifier(n_neighbors=1), 
         returnListDfs.append(returnDf)
         print(data)
 
-        #returnDict['dataset '+idx] = ''
-        
     for dataf in returnListDfs:
         returnmainDf = returnmainDf.append(dataf)
 
