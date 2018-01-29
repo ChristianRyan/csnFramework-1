@@ -1,6 +1,6 @@
 # csnFramework
 
-Simple framework for finding the best k for kNN in python for the course in Machine Learning at Technical University Vienna.
+Simple framework for searching for the best k for kNN and evaluating different optimisation methods in python for the course in Machine Learning at Technical University Vienna.
 
 # How to use
 
@@ -24,7 +24,7 @@ Based on the premise that the best k for kNN is in the area of sqrt(n) where n i
 
 # Optimisation strategies
 
-
+The second part of the
 
 # Contributors
 

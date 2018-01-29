@@ -4,7 +4,7 @@ from sklearn.neighbors import KNeighborsClassifier
 import time
 import math
 from sklearn.model_selection import train_test_split
-from sklearn.externals.joblib.parallel import parallel_backend
+from sklearn.metrics import *
 
 def kdtreeCheck(dataset):
     n = dataset.shape[0]
@@ -17,6 +17,8 @@ def kdtreeCheck(dataset):
     knnkd.fit(X_train, y_train)
     knnkdpred = knnkd.predict(X_test)
     end = time.time()
+    print('Accuracy: ', accuracy_score(y_test, knnkdpred))
+    print('F1 score: ', f1_score(y_test, knnkdpred, average='weighted'))
     print('Runtime was ', end - start)
 
 def bttreeCheck(dataset):
@@ -30,6 +32,8 @@ def bttreeCheck(dataset):
     knnbt.fit(X_train, y_train)
     knnbtpred = knnbt.predict(X_test)
     end = time.time()
+    print('Accuracy: ', accuracy_score(y_test, knnbtpred))
+    print('F1 score: ', f1_score(y_test, knnbtpred, average='weighted'))
     print('Runtime was ', end - start)
 
 
@@ -44,6 +48,8 @@ def bruteCheck(dataset):
     knnbrute.fit(X_train, y_train)
     knnbrutepred = knnbrute.predict(X_test)
     end = time.time()
+    print('Accuracy: ', accuracy_score(y_test, knnbrutepred))
+    print('F1 score: ', f1_score(y_test, knnbrutepred, average='weighted'))
     print('Runtime was ', end - start)
 
 def optimizeEval(datasets):
@@ -57,6 +63,9 @@ def optimizeEval(datasets):
             kdtreeCheck(dataset)
             bttreeCheck(dataset)
             bruteCheck(dataset)
-        except (ValueError, MemoryError) as e:
+        except ValueError as e:
             print(e)
+            continue
+        except MemoryError as f:
+            print('MemoryError')
             continue
