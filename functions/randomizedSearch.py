@@ -30,11 +30,11 @@ def randomSearch(dataset,n_iter,classifier=KNeighborsClassifier(n_neighbors=1), 
         resultsGridSearch = pd.DataFrame(clf.cv_results_)
         #print(resultsGridSearch)
         returnDf[['fit_time', 'accuracy', 'f1_macro', 'f1_micro']] = resultsGridSearch[['mean_fit_time', 'mean_test_accuracy', 'mean_test_f1_macro', 'mean_test_f1_micro']]
-        returnDf['Strategy'] = 'Brute Force'
+        returnDf['Strategy'] = 'Randomised search'
         returnDf['Dataset'] = 'D' + str(idx)
         returnDf['n_instances'] = n
         returnDf['l_attributes'] = len(data.columns)
-        returnDf['k_neighbours'] = resultsGridSearch['param_n_neighbors'] # TODO: Fix k_neighbours
+        returnDf['k_neighbours'] = resultsGridSearch['param_n_neighbors'] 
         returnListDfs.append(returnDf)
         print(data)
 
