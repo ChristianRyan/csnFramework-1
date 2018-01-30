@@ -9,6 +9,7 @@ from randomizedSearch import *
 from report import *
 from sklearn.neighbors import KNeighborsClassifier
 from optimisation import *
+from optimisationNonCV import *
 
 
 # This is the main module the user calls
@@ -35,14 +36,7 @@ def main():
     #rs1 = randomSearch(datasets, 25)
 
     # Binary search
-    bslist = []
-    for dataset in datasets:
-        try:
-            bslist.append(binarySearch(dataset, knn))
-        except Exception as e:
-            continue
-
-    bs1 = mkReport(bslist)
+    bs1 = binarySearch(datasets, knn)
 
     # Create single dataframe
     lodf = [gs3, rs1, bs1]
@@ -51,8 +45,14 @@ def main():
     finalDf.to_csv('results.csv')
 
     # Optimisation strategies
+<<<<<<< HEAD
     oe = optimizeEval(datasets)
     print(oe)
+=======
+    oe1 = optimizeEval(datasets)
+    # Build models and get confusion matrices
+    optimizeEval2(datasets)
+>>>>>>> 703a9d3262e21af5fbbb3f1ab26fc12fafb19b63
     oe.to_csv('optimisation.csv')
 
 if __name__ == "__main__":

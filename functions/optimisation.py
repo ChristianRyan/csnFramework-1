@@ -22,7 +22,8 @@ def kdtreeCheck(dataset, idx):
     start = time.time()
     # knnkd.fit(X_train, y_train)
     # knnkdpred = knnkd.predict(X_test)
-    resultskd = cross_validate(knnkd, X, y)
+    scoring=['accuracy', 'f1_macro', 'f1_micro']
+    resultskd = cross_validate(knnkd, X, y, scoring=scoring)
     resultskddf = pd.DataFrame(resultskd)
     end = time.time()
     returndf = pd.concat([returndf, pd.DataFrame.from_records([{
@@ -33,7 +34,10 @@ def kdtreeCheck(dataset, idx):
         'k': k,
         'avg_fit_time': resultskddf['fit_time'].mean(),
         'avg_score_time': resultskddf['score_time'].mean(),
-        'cv_runtime': end - start
+        'cv_runtime': end - start,
+        'accuracy':resultskddf['test_accuracy'].mean(),
+        'f1_macro':resultskddf['test_f1_macro'].mean(),
+        'f1_micro':resultskddf['test_f1_micro'].mean()
     }])])
 
 def bttreeCheck(dataset, idx):
@@ -48,7 +52,8 @@ def bttreeCheck(dataset, idx):
     start = time.time()
     # knnbt.fit(X_train, y_train)
     # knnbtpred = knnbt.predict(X_test)
-    resultsbt = cross_validate(knnbt, X, y)
+    scoring=['accuracy', 'f1_macro', 'f1_micro']
+    resultsbt = cross_validate(knnbt, X, y, scoring=scoring)
     resultsbtdf = pd.DataFrame(resultsbt)
     end = time.time()
     returndf = pd.concat([returndf, pd.DataFrame.from_records([{
@@ -59,7 +64,10 @@ def bttreeCheck(dataset, idx):
         'k': k,
         'avg_fit_time': resultsbtdf['fit_time'].mean(),
         'avg_score_time': resultsbtdf['score_time'].mean(),
-        'cv_runtime': end - start
+        'cv_runtime': end - start,
+        'accuracy':resultsbtdf['test_accuracy'].mean(),
+        'f1_macro':resultsbtdf['test_f1_macro'].mean(),
+        'f1_micro':resultsbtdf['test_f1_micro'].mean()
     }])])
 
 def bruteCheck(dataset, idx):
@@ -74,7 +82,8 @@ def bruteCheck(dataset, idx):
     start = time.time()
     #knnbrute.fit(X_train, y_train)
     #knnbrutepred = knnbrute.predict(X_test)
-    resultsbrute = cross_validate(knnbrute, X, y)
+    scoring=['accuracy', 'f1_macro', 'f1_micro']
+    resultsbrute = cross_validate(knnbrute, X, y, scoring=scoring)
     resultsbrutedf = pd.DataFrame(resultsbrute)
     end = time.time()
     returndf = pd.concat([returndf, pd.DataFrame.from_records([{
@@ -85,7 +94,10 @@ def bruteCheck(dataset, idx):
         'k': k,
         'avg_fit_time': resultsbrutedf['fit_time'].mean(),
         'avg_score_time': resultsbrutedf['score_time'].mean(),
-        'cv_runtime': end - start
+        'cv_runtime': end - start,
+        'accuracy':resultsbrutedf['test_accuracy'].mean(),
+        'f1_macro':resultsbrutedf['test_f1_macro'].mean(),
+        'f1_micro':resultsbrutedf['test_f1_micro'].mean()
     }])])
 
 
