@@ -37,7 +37,7 @@ def binarySearch(dataset, classifier):
             scores = cross_validate(classifier, X, y, scoring=score_params, return_train_score=False)
             scores_lb = scores['test_accuracy'].mean()
             k = 0
-            while (abs(ub-lb) >= 1) & (abs(scores_ub-scores_lb) >= 0.01):
+            while (abs(ub-lb) >= 0) & (abs(scores_ub-scores_lb) >= 0.01):
                 if (scores_lb > scores_ub):
                     ub = round(abs(ub+lb)/2)
                     dummy = True
@@ -59,7 +59,7 @@ def binarySearch(dataset, classifier):
                     scores_lb = scores['test_accuracy'].mean()
                     print(scores_lb)
         except Exception as e:
-            print('error')
+            print(e)
             continue
         score_params = ['accuracy', 'f1_macro', 'f1_micro']
         classifier.set_params(n_neighbors = k)
@@ -69,12 +69,12 @@ def binarySearch(dataset, classifier):
         scoreFrame = scoreFrame.mean()
         returnDf = pd.DataFrame(scoreFrame)
         returnDf['Strategy'] = 'Binary Search'
-        returnDf['Dataset'] = 'D' + str(inx)
+        returnDf['Dataset'] = 'D' + str(idx)
         returnDf['n_instances'] = n
         returnDf['l_attributes'] = l
         returnDf['k_neighbours'] = k
         returnListDfs.append(returnDf)
-        
+
     for dataf in returnListDfs:
         returnmainDf = returnmainDf.append(dataf)
 
