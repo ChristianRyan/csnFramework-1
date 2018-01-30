@@ -3,54 +3,91 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 import time
 import math
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_validate
 from sklearn.metrics import *
 
-def kdtreeCheck(dataset):
+cols = ['Strategy', 'Dataset', 'n', 'l', 'k', 'avg_fit_time', 'avg_score_time', 'cv_runtime']
+global returndf
+returndf =  pd.DataFrame(columns=cols)
+
+def kdtreeCheck(dataset, idx):
+    global returndf
     n = dataset.shape[0]
+    l = dataset.shape[1]
     k = int(math.sqrt(n))
     knnkd = KNeighborsClassifier(n_neighbors=k, weights='distance', n_jobs=-1, algorithm='kd_tree')
     y = dataset['target']
     X = dataset.drop('target', axis=1)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state = 42)
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state = 42)
     start = time.time()
-    knnkd.fit(X_train, y_train)
-    knnkdpred = knnkd.predict(X_test)
+    # knnkd.fit(X_train, y_train)
+    # knnkdpred = knnkd.predict(X_test)
+    resultskd = cross_validate(knnkd, X, y)
+    resultskddf = pd.DataFrame(resultskd)
     end = time.time()
-    print('Accuracy: ', accuracy_score(y_test, knnkdpred))
-    print('F1 score: ', f1_score(y_test, knnkdpred, average='weighted'))
-    print('Runtime was ', end - start)
+    returndf = pd.concat([returndf, pd.DataFrame.from_records([{
+        'Strategy': 'KDTree',
+        'Dataset': idx,
+        'n': n,
+        'l': l,
+        'k': k,
+        'avg_fit_time': resultskddf['fit_time'].mean(),
+        'avg_score_time': resultskddf['score_time'].mean(),
+        'cv_runtime': end - start
+    }])])
 
-def bttreeCheck(dataset):
+def bttreeCheck(dataset, idx):
+    global returndf
     n = dataset.shape[0]
+    l = dataset.shape[1]
     k = int(math.sqrt(n))
     knnbt = KNeighborsClassifier(n_neighbors=k, weights='distance', n_jobs=-1, algorithm='ball_tree')
     y = dataset['target']
     X = dataset.drop('target', axis=1)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state = 42)
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state = 42)
     start = time.time()
-    knnbt.fit(X_train, y_train)
-    knnbtpred = knnbt.predict(X_test)
+    # knnbt.fit(X_train, y_train)
+    # knnbtpred = knnbt.predict(X_test)
+    resultsbt = cross_validate(knnbt, X, y)
+    resultsbtdf = pd.DataFrame(resultsbt)
     end = time.time()
-    print('Accuracy: ', accuracy_score(y_test, knnbtpred))
-    print('F1 score: ', f1_score(y_test, knnbtpred, average='weighted'))
-    print('Runtime was ', end - start)
+    returndf = pd.concat([returndf, pd.DataFrame.from_records([{
+        'Strategy': 'BallTree',
+        'Dataset': idx,
+        'n': n,
+        'l': l,
+        'k': k,
+        'avg_fit_time': resultsbtdf['fit_time'].mean(),
+        'avg_score_time': resultsbtdf['score_time'].mean(),
+        'cv_runtime': end - start
+    }])])
 
-
-def bruteCheck(dataset):
+def bruteCheck(dataset, idx):
+    global returndf
     n = dataset.shape[0]
+    l = dataset.shape[1]
     k = int(math.sqrt(n))
     knnbrute = KNeighborsClassifier(n_neighbors=k, weights='distance', algorithm='brute')
     y = dataset['target']
     X = dataset.drop('target', axis=1)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state = 42)
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state = 42)
     start = time.time()
-    knnbrute.fit(X_train, y_train)
-    knnbrutepred = knnbrute.predict(X_test)
+    #knnbrute.fit(X_train, y_train)
+    #knnbrutepred = knnbrute.predict(X_test)
+    resultsbrute = cross_validate(knnbrute, X, y)
+    resultsbrutedf = pd.DataFrame(resultsbrute)
     end = time.time()
-    print('Accuracy: ', accuracy_score(y_test, knnbrutepred))
-    print('F1 score: ', f1_score(y_test, knnbrutepred, average='weighted'))
-    print('Runtime was ', end - start)
+    returndf = pd.concat([returndf, pd.DataFrame.from_records([{
+        'Strategy': 'Brute Force',
+        'Dataset': idx,
+        'n': n,
+        'l': l,
+        'k': k,
+        'avg_fit_time': resultsbrutedf['fit_time'].mean(),
+        'avg_score_time': resultsbrutedf['score_time'].mean(),
+        'cv_runtime': end - start
+    }])])
+
 
 def optimizeEval(datasets):
     for idx, dataset in enumerate(datasets):
@@ -60,12 +97,12 @@ def optimizeEval(datasets):
         l = dataset.shape[1]
         print("l for dataset is", l)
         try:
-            kdtreeCheck(dataset)
-            bttreeCheck(dataset)
-            bruteCheck(dataset)
+            kdtreeCheck(dataset, idx)
+            bttreeCheck(dataset, idx)
+            bruteCheck(dataset, idx)
         except ValueError as e:
-            print(e)
             continue
         except MemoryError as f:
-            print('MemoryError')
             continue
+
+    return returndf

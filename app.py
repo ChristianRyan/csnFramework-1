@@ -42,7 +42,8 @@ def main():
     #finalDf.to_csv('./results.csv')
 
     # Optimisation strategies
-    optimizeEval(datasets)
+    oe = optimizeEval(datasets)
+    print(oe)
 
 if __name__ == "__main__":
     main()
