@@ -8,7 +8,6 @@ import numpy as np
 import pandas as pd
 import math as math
 import glob
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import cross_validate
 #from sklearn.cross_validation import cross_validate
 

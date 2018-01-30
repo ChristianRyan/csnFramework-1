@@ -28,8 +28,8 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
         if uprBound is None and lwrBound == 1:
             uprBound = int(math.sqrt(n) + 0.1*(n))
         elif uprBound is None and lwrBound is None:
-            uprBound =  int(math.sqrt(n) + 0.1*(n))
-            lwrBound =  int(math.sqrt(n) - 0.1*(n))
+            uprBound =  int(math.sqrt(n) + 0.03*(n))
+            lwrBound =  int(math.sqrt(n) - 0.03*(n))
             if lwrBound < 0:
                 lwrBound = 1
         else:
@@ -46,8 +46,7 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
 
         # setting the scores and GridSearchCV
         scores = ['accuracy', 'f1_macro', 'f1_micro']
-        clf = GridSearchCV(classifier, gridparams, n_jobs=-1, scoring=scores, refit=False) # BE careful with cores :D
-
+        clf = GridSearchCV(classifier, gridparams, n_jobs=-1, scoring=scores, refit=False)
         print(clf)
 
         # Seperating the X and y, the class to be classified
