@@ -47,11 +47,11 @@ def main():
     # Create single dataframe
     lodf = [gs3, rs1, bs1]
     finalDf = mkReport(lodf)
-    finalDf.to_csv('./results.csv')
+    finalDf.to_csv('results.csv')
 
     # Optimisation strategies
     oe = optimizeEval(datasets)
-    oe.to_csv('./optimisation.csv')
+    oe.to_csv('optimisation.csv')
 
 if __name__ == "__main__":
     main()
