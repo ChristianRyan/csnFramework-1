@@ -52,38 +52,29 @@ def binarySearch(dataset, classifier):
                       scores = cross_validate(classifier, X, y, scoring=score_params, return_train_score=False)
                       scores_ub = scores['test_accuracy'].mean()
                       print(scores_ub)
-                      score_params = ['accuracy', 'f1_macro', 'f1_micro']
-                      classifier.set_params(n_neighbors = k)
-                      scores = cross_validate(classifier, X, y, scoring=score_params, return_train_score=False)
-                      print(scores)
-                      scoreFrame = pd.DataFrame(scores)
-                      scoreFrame = scoreFrame.mean()
-                      returnDf = pd.DataFrame(scoreFrame)
-                      returnDf['Strategy'] = 'Binary Search'
-                      returnDf['Dataset'] = 'D' + str(inx)
-                      returnDf['n_instances'] = n
-                      returnDf['l_attributes'] = l
-                      returnDf['k_neighbours'] = k
-                      returnListDfs.append(returnDf)
                 else:
                     print(lb)
                     classifier.set_params(n_neighbors = lb)
                     scores = cross_validate(classifier, X, y, scoring=score_params, return_train_score=False)
                     scores_lb = scores['test_accuracy'].mean()
                     print(scores_lb)
-                    scoreFrame = pd.DataFrame(scores)
-                    scoreFrame = scoreFrame.mean()
-                    returnDf = pd.DataFrame(scoreFrame)
-                    returnDf['Strategy'] = 'Binary Search'
-                    returnDf['Dataset'] = 'D' + str(inx)
-                    returnDf['n_instances'] = n
-                    returnDf['l_attributes'] = l
-                    returnDf['k_neighbours'] = k
-                    returnListDfs.append(returnDf)
         except Exception as e:
             print('error')
             continue
-
+        score_params = ['accuracy', 'f1_macro', 'f1_micro']
+        classifier.set_params(n_neighbors = k)
+        scores = cross_validate(classifier, X, y, scoring=score_params, return_train_score=False)
+        print(scores)
+        scoreFrame = pd.DataFrame(scores)
+        scoreFrame = scoreFrame.mean()
+        returnDf = pd.DataFrame(scoreFrame)
+        returnDf['Strategy'] = 'Binary Search'
+        returnDf['Dataset'] = 'D' + str(inx)
+        returnDf['n_instances'] = n
+        returnDf['l_attributes'] = l
+        returnDf['k_neighbours'] = k
+        returnListDfs.append(returnDf)
+        
     for dataf in returnListDfs:
         returnmainDf = returnmainDf.append(dataf)
 
