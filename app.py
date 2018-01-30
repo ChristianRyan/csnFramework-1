@@ -28,11 +28,11 @@ def main():
     # gs1 = gridSearch(datasets, knn, uprBound=None, lwrBound = None)
 
     # Brute force search for custom bounds
-    #gs3 = gridSearch(datasets, knn, lwrBound = 10, uprBound = 10)
+    gs3 = gridSearch(datasets, knn, lwrBound = 10, uprBound = 10)
 
     # Random search
 
-    #rs1 = randomSearch(datasets, 25)
+    rs1 = randomSearch(datasets, 25)
 
     # Binary search
     bslist = []
