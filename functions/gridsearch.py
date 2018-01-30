@@ -83,8 +83,8 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
         returnListDfs.append(returnDf)
 
         # Reset bounds
-        uprBound = None
-        lwrBound = None
+        # uprBound = None
+        # lwrBound = None
 
     # Looping over list to create single dataframe
     for dataf in returnListDfs:
