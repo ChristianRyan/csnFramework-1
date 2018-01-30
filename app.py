@@ -28,14 +28,21 @@ def main():
     # gs1 = gridSearch(datasets, knn, uprBound=None, lwrBound = None)
 
     # Brute force search for custom bounds
-    gs3 = gridSearch(datasets, knn, lwrBound = 10, uprBound = 10)
+    #gs3 = gridSearch(datasets, knn, lwrBound = 10, uprBound = 10)
 
     # Random search
 
-    rs1 = randomSearch(datasets, 25)
+    #rs1 = randomSearch(datasets, 25)
 
     # Binary search
-    bs1 = binarySearch(datasets, knn)
+    bslist = []
+    for dataset in datasets:
+        try:
+            bslist.append(binarySearch(dataset, knn))
+        except Exception as e:
+            continue
+
+    bs1 = mkReport(bslist)
 
     # Create single dataframe
     lodf = [gs3, rs1, bs1]
