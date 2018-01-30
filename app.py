@@ -22,25 +22,23 @@ def main():
     print(knn)
 
     # Brute force search from 1 - sqrt(n)+bound
-    #gs2 = gridSearch([datasets[1]], knn)
+    # gs2 = gridSearch([datasets[1]], knn)
 
     # Brute force search from [sqrt(n)-i, sqrt(n)+i]
-    gs1 = gridSearch(datasets, knn, uprBound=None, lwrBound = None)
+    # gs1 = gridSearch(datasets, knn, uprBound=None, lwrBound = None)
 
     # Brute force search for custom bounds
-    #print(gridSearch([datasets[0][1]], knn, lwrBound = 20, uprBound = 40))
+    gs3 = gridSearch(datasets, knn, lwrBound = 10, uprBound = 10)
 
     # Random search
 
-#    rs1 = randomSearch([datasets[1]],2)
-#    print(rs1)
-
+    rs1 = randomSearch(datasets, 25)
 
     # Binary search
     bs1 = binarySearch(datasets, knn)
 
     # Create single dataframe
-    lodf = [gs1, rs1, bs1]
+    lodf = [gs3, rs1, bs1]
     finalDf = mkReport(lodf)
     finalDf.to_csv('./results.csv')
 
