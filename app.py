@@ -9,6 +9,7 @@ from randomizedSearch import *
 from report import *
 from sklearn.neighbors import KNeighborsClassifier
 from optimisation import *
+from optimisationNonCV import *
 
 
 # This is the main module the user calls
@@ -28,24 +29,24 @@ def main():
     # gs1 = gridSearch(datasets, knn, uprBound=None, lwrBound = None)
 
     # Brute force search for custom bounds
-    #gs3 = gridSearch(datasets, knn, lwrBound = 10, uprBound = 10)
+    gs3 = gridSearch(datasets, knn, lwrBound = 10, uprBound = 10)
 
     # Random search
 
-    #rs1 = randomSearch(datasets, 25)
+    rs1 = randomSearch(datasets, 25)
 
     # Binary search
-    #bslist = []
     bs1 = binarySearch(datasets, knn)
 
-
     # Create single dataframe
-    lodf = [bs1]
+    lodf = [gs3, rs1, bs1]
     finalDf = mkReport(lodf)
     finalDf.to_csv('results.csv')
 
     # Optimisation strategies
-    oe = optimizeEval(datasets)
+    oe1 = optimizeEval(datasets)
+    # Build models and get confusion matrices
+    optimizeEval2(datasets)
     oe.to_csv('optimisation.csv')
 
 if __name__ == "__main__":

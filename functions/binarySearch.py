@@ -37,7 +37,7 @@ def binarySearch(dataset, classifier):
             scores = cross_validate(classifier, X, y, scoring=score_params, return_train_score=False)
             scores_lb = scores['test_accuracy'].mean()
             k = 0
-            while (abs(ub-lb) >= 0) & (abs(scores_ub-scores_lb) >= 0.01):
+            while (ub-lb >= 1) & (abs(scores_ub-scores_lb) >= 0.01):
                 if (scores_lb > scores_ub):
                     ub = round(abs(ub+lb)/2)
                     dummy = True
