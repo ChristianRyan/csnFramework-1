@@ -44,6 +44,8 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
         uprBoundnew = int(math.sqrt(n)) + uprBound
         lwrBoundnew = int(math.sqrt(n)) - lwrBound
 
+        if lwrBoundnew <= 0:
+            lwrBoundnew = 1
         print("Upper bound for searching is", uprBoundnew)
         print("Lower bound for searching is", lwrBoundnew)
 
