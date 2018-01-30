@@ -4,6 +4,8 @@ Simple framework for searching for the best k for kNN and evaluating different o
 
 # How to use
 
+Run app.py with python.
+
 ## Datasets
 
 To use put clean datasets in the datasets folder with the target value named 'target'.
@@ -24,7 +26,7 @@ Based on the premise that the best k for kNN is in the area of sqrt(n) where n i
 
 # Optimisation strategies
 
-The second part of the
+The second part of the program checks for different sklearn optimisation strategies and measures fit_time, score_time and runtime of the cross validation. The strategies are kd-tree, ball-tree and brute force.
 
 # Contributors
 

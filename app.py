@@ -25,25 +25,26 @@ def main():
     #gs2 = gridSearch([datasets[1]], knn)
 
     # Brute force search from [sqrt(n)-i, sqrt(n)+i]
-    #gs1 = gridSearch([datasets[1]], knn, lwrBound = None)
+    gs1 = gridSearch([datasets[1]], knn, lwrBound = None)
 
     # Brute force search for custom bounds
     #print(gridSearch([datasets[0][1]], knn, lwrBound = 20, uprBound = 40))
 
     # Random search
-    #rs1 = randomSearch([datasets[1]])
+    rs1 = randomSearch([datasets[1]])
 
     # Binary search
-    #bs1 = binarySearch(datasets[1],knn)
+    bs1 = binarySearch(datasets[1],knn)
 
     # Create single dataframe
-    #lodf = [gs1]
-    #finalDf = mkReport(lodf)
-    #finalDf.to_csv('./results.csv')
+    lodf = [gs1, rs1, bs1]
+    finalDf = mkReport(lodf)
+    finalDf.to_csv('./results.csv')
 
     # Optimisation strategies
     oe = optimizeEval(datasets)
     print(oe)
+    oe.to_csv('./optimisation.csv')
 
 if __name__ == "__main__":
     main()
