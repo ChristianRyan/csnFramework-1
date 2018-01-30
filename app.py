@@ -43,7 +43,6 @@ def main():
 
     # Optimisation strategies
     oe = optimizeEval(datasets)
-    print(oe)
     oe.to_csv('./optimisation.csv')
 
 if __name__ == "__main__":
