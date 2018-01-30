@@ -29,7 +29,8 @@ def main():
     #print(gridSearch([datasets[0][1]], knn, lwrBound = 20, uprBound = 40))
 
     # Random search
-    rs1 = randomSearch([datasets[1]])
+#    rs1 = randomSearch([datasets[1]],2)
+#    print(rs1)
 
     # Binary search
     bs1 = binarySearch(datasets[1],knn)
