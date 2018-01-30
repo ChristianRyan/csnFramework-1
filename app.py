@@ -32,8 +32,12 @@ def main():
 
     # Random search
 <<<<<<< HEAD
+<<<<<<< HEAD
 #    rs1 = randomSearch([datasets[1]],2)
 #    print(rs1)
+=======
+    rs1 = randomSearch(datasets, 20)
+>>>>>>> 1fe5c8c1a3119f86294cd500dbe49083bf68da7c
 =======
     rs1 = randomSearch(datasets, 20)
 >>>>>>> 1fe5c8c1a3119f86294cd500dbe49083bf68da7c
