@@ -17,7 +17,7 @@ def randomSearch(dataset,n_iter,classifier=KNeighborsClassifier(n_neighbors=1), 
     returnmainDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'f1_macro', 'f1_micro'])
 
     returnListDfs = []
-    
+
     for idx, data in enumerate(dataset):
         returnDf = pd.DataFrame(columns = ['Strategy', 'Dataset', 'n_instances', 'l_attributes', 'k_neighbours', 'fit_time', 'accuracy', 'f1_macro', 'f1_micro'])
         print("New dataset",data.shape[0])
@@ -35,9 +35,9 @@ def randomSearch(dataset,n_iter,classifier=KNeighborsClassifier(n_neighbors=1), 
         returnDf['Dataset'] = 'D' + str(idx)
         returnDf['n_instances'] = n
         returnDf['l_attributes'] = len(data.columns)
-        returnDf['k_neighbours'] = resultsGridSearch['param_n_neighbors'] 
+        returnDf['k_neighbours'] = resultsGridSearch['param_n_neighbors']
         returnListDfs.append(returnDf)
-        
+
 
     for dataf in returnListDfs:
         returnmainDf = returnmainDf.append(dataf)
