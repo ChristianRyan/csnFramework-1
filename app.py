@@ -31,16 +31,10 @@ def main():
     #print(gridSearch([datasets[0][1]], knn, lwrBound = 20, uprBound = 40))
 
     # Random search
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #    rs1 = randomSearch([datasets[1]],2)
 #    print(rs1)
-=======
-    rs1 = randomSearch(datasets, 20)
->>>>>>> 1fe5c8c1a3119f86294cd500dbe49083bf68da7c
-=======
-    rs1 = randomSearch(datasets, 20)
->>>>>>> 1fe5c8c1a3119f86294cd500dbe49083bf68da7c
+
 
     # Binary search
     bs1 = binarySearch(datasets, knn)
