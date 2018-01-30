@@ -41,14 +41,14 @@ def gridSearch(dataset, classifier, lwrBound = 1, uprBound = None):
         #         uprBound = int(math.sqrt(n) + uprBound)
         #         if lwrBound < 0:
         #             lwrBound = 1
-        uprBound = int(math.sqrt(n)) + uprBound
-        lwrBound = int(math.sqrt(n)) - lwrBound
+        uprBoundnew = int(math.sqrt(n)) + uprBound
+        lwrBoundnew = int(math.sqrt(n)) - lwrBound
 
-        print("Upper bound for searching is", uprBound)
-        print("Lower bound for searching is", lwrBound)
+        print("Upper bound for searching is", uprBoundnew)
+        print("Lower bound for searching is", lwrBoundnew)
 
         # Setting of the k for grid parameters
-        gridparams = {'n_neighbors' : np.unique(np.linspace(lwrBound, uprBound, num=n).astype(int))}
+        gridparams = {'n_neighbors' : np.unique(np.linspace(lwrBoundnew, uprBoundnew, num=n).astype(int))}
         print("Grid parameters for the dataset are", gridparams)
 
         # setting the scores and GridSearchCV
