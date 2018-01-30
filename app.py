@@ -25,7 +25,7 @@ def main():
     #gs2 = gridSearch([datasets[1]], knn)
 
     # Brute force search from [sqrt(n)-i, sqrt(n)+i]
-    gs1 = gridSearch(datasets, knn, lwrBound = None)
+    gs1 = gridSearch(datasets, knn, uprBound=None, lwrBound = None)
 
     # Brute force search for custom bounds
     #print(gridSearch([datasets[0][1]], knn, lwrBound = 20, uprBound = 40))
